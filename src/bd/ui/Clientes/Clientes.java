@@ -1,9 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package bd.ui.Clientes;
+
+import bd.models.Cliente;
+import bd.ui.nuevo_cliente.NuevoCliente;
+import com.db4o.Db4oEmbedded;
+import com.db4o.ObjectContainer;
+import com.db4o.ObjectSet;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -11,11 +16,11 @@ package bd.ui.Clientes;
  */
 public class Clientes extends javax.swing.JPanel {
 
-    /**
-     * Creates new form Clientes
-     */
+    public DefaultTableModel modelo;
+
     public Clientes() {
         initComponents();
+        cargarDatos();
     }
 
     /**
@@ -27,34 +32,251 @@ public class Clientes extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TableHistorial = new javax.swing.JTable();
+        btnNuevaMascota = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(22, 29, 42));
 
-        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("clientes");
+        jPanel3.setBackground(new java.awt.Color(33, 45, 62));
+        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jScrollPane1.setBackground(new java.awt.Color(33, 45, 62));
+
+        TableHistorial.setBackground(new java.awt.Color(33, 45, 62));
+        TableHistorial.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        TableHistorial.setForeground(new java.awt.Color(255, 255, 255));
+        TableHistorial.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "ID", "Apellido Paterno", "Apellido Materno", "Carnet de Identidad"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        TableHistorial.setGridColor(new java.awt.Color(204, 204, 204));
+        TableHistorial.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        modelo = new DefaultTableModel() {
+            public boolean isCellEditable(int fila, int columna) {
+                return false;
+            }
+        };
+        TableHistorial.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TableHistorialMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(TableHistorial);
+        jScrollPane1.setOpaque (false);
+        TableHistorial.setOpaque (false);
+        ((DefaultTableCellRenderer) TableHistorial.getDefaultRenderer(Object.class)).setOpaque(false);
+        jScrollPane1.getViewport().setOpaque(false);
+
+        btnNuevaMascota.setBackground(new java.awt.Color(33, 45, 62));
+        btnNuevaMascota.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        btnNuevaMascota.setForeground(new java.awt.Color(255, 255, 255));
+        btnNuevaMascota.setText("Añadir cliente");
+        btnNuevaMascota.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnNuevaMascota.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevaMascotaActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(btnNuevaMascota, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 562, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(btnNuevaMascota, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(255, 255, 255)
-                .addComponent(jLabel1)
-                .addContainerGap(295, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(182, 182, 182)
-                .addComponent(jLabel1)
-                .addContainerGap(272, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void TableHistorialMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableHistorialMouseClicked
+
+        //        if (evt.getClickCount() == 2) {
+        //
+        //            //codigo para sacar el id del paciente de la tabla
+        //            int aux = 0;
+        //            for(int i = 0; i <= TableHistorial.getSelectedRow();i++){
+        //                aux = Integer.parseInt(TableHistorial.getValueAt(i, 1).toString());
+        //            }
+        //            //convirtiendo a String
+        //            String consulta = String.valueOf(aux);
+        //
+        //            Connection connection;
+        //            String sql = "select *from historiaclinica where id = ?";
+        //            try {
+        //                connection = con.getConnection();
+        //                PreparedStatement pst = connection.prepareStatement(sql);
+        //
+        //                pst.setInt(1, aux);
+        //                ResultSet rs = pst.executeQuery();
+        //
+        //                String[] botones = {"Ver", "Modificar", "Eliminar"};
+        //                int ventana = JOptionPane.showOptionDialog(null, "Selecciona una opcion:", "Seleccione", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, botones, botones[0]);
+        //                if (ventana == 0) { //Ver
+        //                    if (rs.next()) {
+        //
+        //                        FormularioVer iniciar = new FormularioVer();
+        //                        iniciar.cargarDatosHistoria(consulta);
+        //                        iniciar.cargarDatos(valorHistoria);
+        //                        iniciar.setVisible(true);
+        //
+        //                        //cerrando conexion
+        //                        //connection.close();
+        //                    }
+        //                }
+        //                if (ventana == 1) { //Modificar
+        //                    if (rs.next()) {
+        //                        FormularioModificar iniciar = new FormularioModificar();
+        //                        iniciar.cargarDatosHistoria(consulta);
+        //                        iniciar.cargarDatos(valorHistoria);
+        //                        iniciar.setVisible(true);
+        //                        //cerrando conexion
+        //                        //connection.close();
+        //                    }
+        //                }
+        //                if (ventana == 2) { //Eliminar
+        //                    int ventanaYesNotCancel = JOptionPane.showConfirmDialog(null, "¿Quieres eliminar esta historia clinica?", "Peligro", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        //                    //0=yes, 1=no
+        //                    if (ventanaYesNotCancel == 0) {
+        //                        String sqlDelete = "delete from historiaclinica where id = '" + consulta + "'";
+        //
+        //                        PreparedStatement ps = connection.prepareStatement(sqlDelete);
+        //                        ps.executeUpdate();
+        //                        JOptionPane.showMessageDialog(null, "Eliminado correctamente");
+        //                        mostrarPersonas();
+        //
+        //                    }
+        //                }
+        //
+        //            } catch (SQLException e) {
+        //                System.out.println(e);
+        //            }
+    }//GEN-LAST:event_TableHistorialMouseClicked
+
+    private void cargarDatos() {
+
+        ObjectContainer db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), "VETERINARIA");
+        try {
+
+            ObjectSet result = db.queryByExample(Cliente.class);
+
+            ArrayList<Cliente> listaClientes = new ArrayList<>();
+            while (result.hasNext()) {
+                listaClientes.add((Cliente) result.next());
+            }
+
+            DefaultTableModel model = mostrarClientes(listaClientes);
+            TableHistorial.setModel(model);
+
+            //Ocultar numeracion de la tabla
+            TableHistorial.getColumnModel().getColumn(0).setMaxWidth(0);
+            TableHistorial.getColumnModel().getColumn(0).setMinWidth(0);
+            TableHistorial.getColumnModel().getColumn(0).setPreferredWidth(0);
+
+            //Ocultar id de la mascota
+            TableHistorial.getColumnModel().getColumn(1).setMaxWidth(0);
+            TableHistorial.getColumnModel().getColumn(1).setMinWidth(0);
+            TableHistorial.getColumnModel().getColumn(1).setPreferredWidth(0);
+
+        } finally {
+            db.close();
+        }
+
+    }
+
+    public DefaultTableModel mostrarClientes(List<Cliente> clientes) {
+
+        int contador = 1; // Dedicado para acomular en número de registros que hay en la tabla
+
+        String[] nombresColumnas = {"  #  ", "Carnet", "Nombres", "Apellido Paterno", "Apellido Materno"};//Indica el nombre de las columnas en la tabla
+        String[] registros = new String[5];
+
+        DefaultTableModel model;
+        //bloquear celdas editables
+        model = new DefaultTableModel(null, nombresColumnas) {
+            public boolean isCellEditable(int fila, int columna) {
+                return false;
+            }
+        };
+
+        for (int i = 0; i < clientes.size(); i++) {
+            registros[0] = Integer.toString(contador);
+            registros[1] = String.valueOf(clientes.get(i).getCi());
+            registros[2] = String.valueOf(clientes.get(i).getNombres());
+            registros[3] = String.valueOf(clientes.get(i).getApellidoPaterno());
+            registros[4] = String.valueOf(clientes.get(i).getApellidoMaterno());
+
+            model.addRow(registros);
+            contador++;
+        }
+
+        return model;
+    }
+
+    private void btnNuevaMascotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaMascotaActionPerformed
+        NuevoCliente nuevoCliente = new NuevoCliente();
+        nuevoCliente.setVisible(true);
+    }//GEN-LAST:event_btnNuevaMascotaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    public javax.swing.JTable TableHistorial;
+    private javax.swing.JButton btnNuevaMascota;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
