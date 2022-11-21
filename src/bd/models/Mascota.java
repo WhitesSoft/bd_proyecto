@@ -8,7 +8,7 @@ import java.util.List;
  * @author juandaniel
  */
 public class Mascota {
-    
+
     private int id;
     private String nombre;
     private String fechaNac;
@@ -30,8 +30,8 @@ public class Mascota {
         this.peso = peso;
         this.consultas = new ArrayList();
     }
-    
-    public void addConsulta(Consulta consulta){
+
+    public void addConsulta(Consulta consulta) {
         consultas.add(consulta);
     }
 
@@ -101,10 +101,7 @@ public class Mascota {
 
     @Override
     public String toString() {
-        return "Mascota{" + "id=" + id + ", nombre=" + nombre + ", fechaNac=" + fechaNac + ", raza=" + raza + ", color=" + color + ", peso=" + peso;
+        return "Mascota{" + "id=" + id + ", nombre=" + nombre + ", fechaNac=" + fechaNac + ", raza=" + raza + ", color=" + color + ", peso=" + peso + ", consultas=" + consultas + '}';
     }
 
-
-
-    
 }

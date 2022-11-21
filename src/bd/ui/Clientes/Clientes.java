@@ -1,12 +1,16 @@
 package bd.ui.Clientes;
 
 import bd.models.Cliente;
-import bd.ui.nuevo_cliente.NuevoCliente;
+import bd.models.Consulta;
+import bd.models.Mascota;
+import bd.utilities.editar_cliente.EditarCliente;
+import bd.utilities.nuevo_cliente.NuevoCliente;
 import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
@@ -145,66 +149,40 @@ public class Clientes extends javax.swing.JPanel {
 
     private void TableHistorialMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableHistorialMouseClicked
 
-        //        if (evt.getClickCount() == 2) {
-        //
-        //            //codigo para sacar el id del paciente de la tabla
-        //            int aux = 0;
-        //            for(int i = 0; i <= TableHistorial.getSelectedRow();i++){
-        //                aux = Integer.parseInt(TableHistorial.getValueAt(i, 1).toString());
-        //            }
-        //            //convirtiendo a String
-        //            String consulta = String.valueOf(aux);
-        //
-        //            Connection connection;
-        //            String sql = "select *from historiaclinica where id = ?";
-        //            try {
-        //                connection = con.getConnection();
-        //                PreparedStatement pst = connection.prepareStatement(sql);
-        //
-        //                pst.setInt(1, aux);
-        //                ResultSet rs = pst.executeQuery();
-        //
-        //                String[] botones = {"Ver", "Modificar", "Eliminar"};
-        //                int ventana = JOptionPane.showOptionDialog(null, "Selecciona una opcion:", "Seleccione", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, botones, botones[0]);
-        //                if (ventana == 0) { //Ver
-        //                    if (rs.next()) {
-        //
-        //                        FormularioVer iniciar = new FormularioVer();
-        //                        iniciar.cargarDatosHistoria(consulta);
-        //                        iniciar.cargarDatos(valorHistoria);
-        //                        iniciar.setVisible(true);
-        //
-        //                        //cerrando conexion
-        //                        //connection.close();
-        //                    }
-        //                }
-        //                if (ventana == 1) { //Modificar
-        //                    if (rs.next()) {
-        //                        FormularioModificar iniciar = new FormularioModificar();
-        //                        iniciar.cargarDatosHistoria(consulta);
-        //                        iniciar.cargarDatos(valorHistoria);
-        //                        iniciar.setVisible(true);
-        //                        //cerrando conexion
-        //                        //connection.close();
-        //                    }
-        //                }
-        //                if (ventana == 2) { //Eliminar
-        //                    int ventanaYesNotCancel = JOptionPane.showConfirmDialog(null, "¿Quieres eliminar esta historia clinica?", "Peligro", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-        //                    //0=yes, 1=no
-        //                    if (ventanaYesNotCancel == 0) {
-        //                        String sqlDelete = "delete from historiaclinica where id = '" + consulta + "'";
-        //
-        //                        PreparedStatement ps = connection.prepareStatement(sqlDelete);
-        //                        ps.executeUpdate();
-        //                        JOptionPane.showMessageDialog(null, "Eliminado correctamente");
-        //                        mostrarPersonas();
-        //
-        //                    }
-        //                }
-        //
-        //            } catch (SQLException e) {
-        //                System.out.println(e);
-        //            }
+        if (evt.getClickCount() == 2) {
+
+            //codigo para sacar el ci del cliente de la tabla
+            int ciCliente = 0;
+            for (int i = 0; i <= TableHistorial.getSelectedRow(); i++) {
+                ciCliente = Integer.parseInt(TableHistorial.getValueAt(i, 1).toString());
+            }
+
+            String[] botones = {"Ver", "Editar", "Eliminar"};
+            int ventana = JOptionPane.showOptionDialog(null, "Selecciona una opcion:", "Seleccione", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, botones, botones[0]);
+
+            if (ventana == 0) { //Ver
+                cargarInformacion(ciCliente);
+            }
+
+            if (ventana == 1) { //Editar
+                EditarCliente editarCliente = new EditarCliente(ciCliente);
+                editarCliente.setVisible(true);
+            }
+
+            if (ventana == 2) { //Eliminar
+                int ventanaYesNotCancel = JOptionPane.showConfirmDialog(null, "¿Quieres eliminar este cliente?", "Peligro", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                //0=yes, 1=no
+                if (ventanaYesNotCancel == 0) {
+
+                    eliminarCliente(ciCliente);
+                    JOptionPane.showMessageDialog(null, "Eliminado correctamente");
+                    cargarDatos();
+
+                }
+            }
+
+        }
+
     }//GEN-LAST:event_TableHistorialMouseClicked
 
     private void cargarDatos() {
@@ -231,6 +209,68 @@ public class Clientes extends javax.swing.JPanel {
             TableHistorial.getColumnModel().getColumn(1).setMaxWidth(0);
             TableHistorial.getColumnModel().getColumn(1).setMinWidth(0);
             TableHistorial.getColumnModel().getColumn(1).setPreferredWidth(0);
+
+        } finally {
+            db.close();
+        }
+
+    }
+
+    private void cargarInformacion(int ciCliente) {
+        ObjectContainer db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), "VETERINARIA");
+        try {
+            ObjectSet result = db.queryByExample(new Cliente(ciCliente, null, null, null, null, 0, null));
+            Cliente cliente = (Cliente) result.get(0);
+
+            String info = "Carnet de identidad: " + cliente.getCi() + "\n"
+                    + "Nombre Cliente: " + cliente.getNombres() + "\n"
+                    + "Apellido Paterno: " + cliente.getApellidoPaterno() + "\n"
+                    + "Apellido Materno: " + cliente.getApellidoMaterno() + "\n"
+                    + "Celular: " + cliente.getCelular() + "\n"
+                    + "Fecha de Nacimiento: " + cliente.getFechaNac() + "\n"
+                    + "Fecha de registro: " + cliente.getFechaReg() + "\n"
+                    + "Cantidad de mascotas " + cliente.getMascotas().size() + "\n";
+
+            JOptionPane.showMessageDialog(null, info);
+
+        } finally {
+            db.close();
+        }
+    }
+
+    private void eliminarCliente(int id) {
+
+        ObjectContainer db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), "VETERINARIA");
+        try {
+
+            //Obtenemos el cliente
+            ObjectSet resultCliente = db.queryByExample(new Cliente(id, null, null, null, null, 0, null));
+            Cliente cliente = (Cliente) resultCliente.get(0);
+
+            //Adicianamos en una lista todas las mascotas del cliente
+            ArrayList<Mascota> lista = new ArrayList<>();
+            for (int i = 0; i < cliente.getMascotas().size(); i++) {
+                lista.add((Mascota) cliente.getMascotas().get(i));
+            }
+
+            //Eliminamos las mascotas de la base de datos
+            for (int i = 0; i < lista.size(); i++) {
+                ObjectSet resultMascota = db.queryByExample(new Mascota(lista.get(i).getId(), null, null, null, null, 0));
+                Mascota mascota = (Mascota) resultMascota.get(0);
+                System.out.println("\nMascota: " + mascota);
+
+                //Eliminamos las consultas de la mascota
+                ObjectSet resultConsulta = db.queryByExample(new Consulta(0, null, null, lista.get(i).getId()));
+                for (int j = 0; j < mascota.getConsultas().size(); j++) {
+                    Consulta consulta = (Consulta) resultConsulta.get(j);
+                    db.delete(consulta);
+                }
+
+                db.delete(mascota);
+            }
+
+            //Eliminamos cliente
+            db.delete(cliente);
 
         } finally {
             db.close();

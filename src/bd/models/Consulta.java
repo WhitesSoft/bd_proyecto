@@ -64,8 +64,10 @@ public class Consulta {
 
     @Override
     public String toString() {
-        return "Consulta{" + "id=" + id + ", descripcion=" + descripcion + ", fecha=" + fecha + ", idMascota=" + idMascota + '}';
+        return "Consulta{" + "id=" + id + ", descripcion=" + descripcion + ", fecha=" + fecha + ", idMascota=" + idMascota;
     }
+
+    
 
  
 }

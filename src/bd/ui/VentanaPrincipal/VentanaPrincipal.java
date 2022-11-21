@@ -37,21 +37,33 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         panelBotones.setBackground(new java.awt.Color(22, 29, 42));
         panelBotones.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(73, 181, 172)));
 
+        btnClientes.setBackground(new java.awt.Color(33, 45, 62));
+        btnClientes.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnClientes.setForeground(new java.awt.Color(255, 255, 255));
         btnClientes.setText("Clientes");
+        btnClientes.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnClientesActionPerformed(evt);
             }
         });
 
+        btnConsultas.setBackground(new java.awt.Color(33, 45, 62));
+        btnConsultas.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnConsultas.setForeground(new java.awt.Color(255, 255, 255));
         btnConsultas.setText("Consultas");
+        btnConsultas.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnConsultas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConsultasActionPerformed(evt);
             }
         });
 
+        btnMascotas.setBackground(new java.awt.Color(33, 45, 62));
+        btnMascotas.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnMascotas.setForeground(new java.awt.Color(255, 255, 255));
         btnMascotas.setText("Mascotas");
+        btnMascotas.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnMascotas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMascotasActionPerformed(evt);
@@ -82,11 +94,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        contenedorPaneles.setBackground(new java.awt.Color(22, 29, 42));
+        contenedorPaneles.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(73, 181, 172)));
+
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Veterinaria ................................");
+        jLabel1.setText("Veterinaria Lazcano");
 
         javax.swing.GroupLayout contenedorLayout = new javax.swing.GroupLayout(contenedor);
         contenedor.setLayout(contenedorLayout);

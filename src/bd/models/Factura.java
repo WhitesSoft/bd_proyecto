@@ -10,15 +10,17 @@ public class Factura {
     private String razonSocial;
     private int nit;
     private float monto;
+    private int idConsulta;
 
     public Factura() {
     }
 
-    public Factura(int id, String razonSocial, int nit, float monto) {
+    public Factura(int id, String razonSocial, int nit, float monto, int idConsulta) {
         this.id = id;
         this.razonSocial = razonSocial;
         this.nit = nit;
         this.monto = monto;
+        this.idConsulta = idConsulta;
     }
 
     public int getId() {
@@ -52,7 +54,18 @@ public class Factura {
     public void setMonto(float monto) {
         this.monto = monto;
     }
-    
-    
-    
+
+    public int getIdConsulta() {
+        return idConsulta;
+    }
+
+    public void setIdConsulta(int idConsulta) {
+        this.idConsulta = idConsulta;
+    }
+
+    @Override
+    public String toString() {
+        return "Factura{" + "id=" + id + ", razonSocial=" + razonSocial + ", nit=" + nit + ", monto=" + monto + ", idConsulta=" + idConsulta + '}';
+    }
+
 }
