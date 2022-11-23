@@ -109,6 +109,12 @@ public class EditarMascota extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Peso:");
 
+        txtFieldPesoMascota.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtFieldPesoMascotaKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -245,6 +251,20 @@ public class EditarMascota extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btnModficarActionPerformed
+
+    private void txtFieldPesoMascotaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFieldPesoMascotaKeyTyped
+        int key = evt.getKeyChar();
+
+        boolean numeros = key >= 48 && key <= 57;
+
+        if (!numeros) {
+            evt.consume();
+        }
+
+        if (txtFieldPesoMascota.getText().trim().length() == 10) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtFieldPesoMascotaKeyTyped
 
     private void actualizarDB(ObjectContainer base) {
 

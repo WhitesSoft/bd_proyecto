@@ -158,6 +158,12 @@ public class NuevaConsulta extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("NIT: ");
 
+        txtFieldNIT.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtFieldNITKeyTyped(evt);
+            }
+        });
+
         jLabel9.setBackground(new java.awt.Color(255, 255, 255));
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Monto:");
@@ -274,6 +280,20 @@ public class NuevaConsulta extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btnAddActionPerformed
+
+    private void txtFieldNITKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFieldNITKeyTyped
+        int key = evt.getKeyChar();
+
+        boolean numeros = key >= 48 && key <= 57;
+
+        if (!numeros) {
+            evt.consume();
+        }
+
+        if (txtFieldNIT.getText().trim().length() == 10) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtFieldNITKeyTyped
 
     private void crearConsulta(ObjectContainer base) {
 

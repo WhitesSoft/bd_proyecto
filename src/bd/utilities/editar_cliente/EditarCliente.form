@@ -317,6 +317,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtFieldCelularCliente">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtFieldCelularClienteKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="txtFieldPaternoCliente">
             </Component>
@@ -344,6 +347,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtFieldCarnetCliente">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtFieldCarnetClienteKeyTyped"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

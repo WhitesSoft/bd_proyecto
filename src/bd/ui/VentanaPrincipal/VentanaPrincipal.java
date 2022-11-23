@@ -3,6 +3,7 @@ package bd.ui.VentanaPrincipal;
 import bd.ui.Clientes.Clientes;
 import bd.ui.Consultas.Consultas;
 import bd.ui.Mascotas.Mascotas;
+import java.awt.Toolkit;
 
 public class VentanaPrincipal extends javax.swing.JFrame {
 
@@ -12,6 +13,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(this);
         this.setResizable(false);
+        this.setTitle("Veterinario Lazcano");
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/logo.png")));
         
         contenedorPaneles.setViewportView(mascotas);
     }

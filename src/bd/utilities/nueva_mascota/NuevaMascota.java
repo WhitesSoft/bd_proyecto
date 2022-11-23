@@ -129,6 +129,12 @@ public class NuevaMascota extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Peso:");
 
+        txtFieldPesoMascota.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtFieldPesoMascotaKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -208,12 +214,24 @@ public class NuevaMascota extends javax.swing.JFrame {
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("Celular:");
 
+        txtFieldCelularCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtFieldCelularClienteKeyTyped(evt);
+            }
+        });
+
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setText("Fecha Registro:");
 
         jLabel16.setBackground(new java.awt.Color(255, 255, 255));
         jLabel16.setForeground(new java.awt.Color(255, 255, 255));
         jLabel16.setText("Carnet de identidad:");
+
+        txtFieldCarnetCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtFieldCarnetClienteKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -374,6 +392,48 @@ public class NuevaMascota extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_btnAddActionPerformed
+
+    private void txtFieldPesoMascotaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFieldPesoMascotaKeyTyped
+        int key = evt.getKeyChar();
+
+        boolean numeros = key >= 48 && key <= 57;
+
+        if (!numeros) {
+            evt.consume();
+        }
+
+        if (txtFieldPesoMascota.getText().trim().length() == 10) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtFieldPesoMascotaKeyTyped
+
+    private void txtFieldCarnetClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFieldCarnetClienteKeyTyped
+        int key = evt.getKeyChar();
+
+        boolean numeros = key >= 48 && key <= 57;
+
+        if (!numeros) {
+            evt.consume();
+        }
+
+        if (txtFieldCarnetCliente.getText().trim().length() == 10) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtFieldCarnetClienteKeyTyped
+
+    private void txtFieldCelularClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFieldCelularClienteKeyTyped
+        int key = evt.getKeyChar();
+
+        boolean numeros = key >= 48 && key <= 57;
+
+        if (!numeros) {
+            evt.consume();
+        }
+
+        if (txtFieldCelularCliente.getText().trim().length() == 10) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtFieldCelularClienteKeyTyped
 
     private void crearDB(ObjectContainer base) {
 
